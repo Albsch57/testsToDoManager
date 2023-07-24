@@ -9,13 +9,9 @@ import Foundation
 import UIKit
 
 struct Task {
+    let id: UUID?
     var title: String
     var description: String
-    var status: TaskStatus
-}
-
-enum TaskStatus: String {
-    case completed = "Выполнено"
-    case notCompleted = "Не выполнено"
+    var isComplete: Bool
 }
 

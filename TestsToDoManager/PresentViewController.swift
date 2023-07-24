@@ -9,6 +9,7 @@ import UIKit
 
 protocol PresentViewDelegate: AnyObject {
     func didCreated(new task: Task)
+    func edited(task: Task)
 }
 
 
@@ -17,6 +18,7 @@ class PresentViewController: UIViewController {
     private var titleField: UITextField! = nil
     private var secondaryField: UITextField! = nil
     
+    var task: Task?
     weak var delegate: PresentViewDelegate?
     
     override func viewDidLoad() {
@@ -72,11 +74,21 @@ class PresentViewController: UIViewController {
     
     @objc
     private func saveButtonTapped(_ sender: UIButton) {
-        let title = titleField.text ?? ""
-        let description = secondaryField.text ?? ""
-        let newTask = Task(title: title, description: description, status: .notCompleted)
-        delegate?.didCreated(new: newTask)
-        dismiss(animated: true, completion: nil)
+        
+        guard let title = titleField.text else { return }
+        guard !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+        
+        if var task {
+            task.title = title
+            task.description = secondaryField.text!
+            delegate?.edited(task: task)
+            dismiss(animated: true, completion: nil)
+        } else {
+            let newTask = Task(id: nil, title: title, description: secondaryField.text!, isComplete: false)
+            delegate?.didCreated(new: newTask)
+            dismiss(animated: true, completion: nil)
+        }
+        
     }
     
 }
