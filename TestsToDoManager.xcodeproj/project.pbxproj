@@ -17,6 +17,7 @@
 		42789E5A2A6E917D00445807 /* TestsToDoManagerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42789E592A6E917D00445807 /* TestsToDoManagerUITestsLaunchTests.swift */; };
 		42789E672A6E934200445807 /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42789E662A6E934200445807 /* ToDo.swift */; };
 		42789E692A6E9E3900445807 /* PresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42789E682A6E9E3900445807 /* PresentViewController.swift */; };
+		427F84BD2A701CB8006B9A31 /* ToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427F84BC2A701CB8006B9A31 /* ToDoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		42789E592A6E917D00445807 /* TestsToDoManagerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestsToDoManagerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		42789E662A6E934200445807 /* ToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
 		42789E682A6E9E3900445807 /* PresentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentViewController.swift; sourceTree = "<group>"; };
+		427F84BB2A6FBE6F006B9A31 /* TestsToDoManager.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestsToDoManager.xctestplan; sourceTree = "<group>"; };
+		427F84BC2A701CB8006B9A31 /* ToDoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,7 @@
 		42789E2A2A6E917B00445807 = {
 			isa = PBXGroup;
 			children = (
+				427F84BB2A6FBE6F006B9A31 /* TestsToDoManager.xctestplan */,
 				42789E352A6E917B00445807 /* TestsToDoManager */,
 				42789E4C2A6E917C00445807 /* TestsToDoManagerTests */,
 				42789E562A6E917D00445807 /* TestsToDoManagerUITests */,
@@ -125,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				42789E572A6E917D00445807 /* TestsToDoManagerUITests.swift */,
+				427F84BC2A701CB8006B9A31 /* ToDoView.swift */,
 				42789E592A6E917D00445807 /* TestsToDoManagerUITestsLaunchTests.swift */,
 			);
 			path = TestsToDoManagerUITests;
@@ -281,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42789E5A2A6E917D00445807 /* TestsToDoManagerUITestsLaunchTests.swift in Sources */,
+				427F84BD2A701CB8006B9A31 /* ToDoView.swift in Sources */,
 				42789E582A6E917D00445807 /* TestsToDoManagerUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

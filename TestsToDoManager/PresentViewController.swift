@@ -18,14 +18,23 @@ class PresentViewController: UIViewController {
     private var titleField: UITextField! = nil
     private var secondaryField: UITextField! = nil
     
-    var task: Task?
+    var task: Task! = nil
     weak var delegate: PresentViewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         makeLayout()
+        configurePreinstallData()
+        
+        view.accessibilityIdentifier = "ModalView"
     }
+    
+    private func configurePreinstallData() {
+        titleField.text = task?.title
+        secondaryField.text = task?.description
+    }
+
     
     private func makeLayout() {
         
@@ -35,6 +44,7 @@ class PresentViewController: UIViewController {
         
         let secondaryView = makeLabel(title: "Description")
         secondaryField = makeTextField(placeholder: "Title description")
+        
         
         var configuration = UIButton.Configuration.filled()
         configuration.title = "Create task"
@@ -75,8 +85,14 @@ class PresentViewController: UIViewController {
     @objc
     private func saveButtonTapped(_ sender: UIButton) {
         
-        guard let title = titleField.text else { return }
-        guard !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+        guard let title = titleField.text, !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            
+            let alertController = UIAlertController(title: "Необходимо заполнить поля ввода", message: nil, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alertController, animated: true)
+            return
+        }
+        
         
         if var task {
             task.title = title
@@ -84,7 +100,7 @@ class PresentViewController: UIViewController {
             delegate?.edited(task: task)
             dismiss(animated: true, completion: nil)
         } else {
-            let newTask = Task(id: nil, title: title, description: secondaryField.text!, isComplete: false)
+            let newTask = Task(title: title, description: secondaryField.text!, isComplete: false)
             delegate?.didCreated(new: newTask)
             dismiss(animated: true, completion: nil)
         }
@@ -99,6 +115,7 @@ extension PresentViewController {
         textField.placeholder = placeholder
         textField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.delegate = self
         return textField
     }
     
@@ -111,4 +128,9 @@ extension PresentViewController {
     }
 }
 
-
+extension PresentViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}

@@ -9,21 +9,65 @@ import XCTest
 @testable import TestsToDoManager
 
 final class TestsToDoManagerTests: XCTestCase {
+    
+    var taskManager: ToDoManager! = nil
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        taskManager = ToDoManager()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        taskManager = nil
+        try super.tearDownWithError()
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    func testAddTask() throws {
+        
+        let startCount = taskManager.taskCount
+        let task = makeTask()
+        taskManager.addTask(task)
+        
+        XCTAssertEqual(taskManager.taskCount, startCount + 1)
+    }
+    
+    func testRemoveTask() throws {
+        
+        // v1
+        let task = makeTask()
+        
+        taskManager.addTask(task)
+        let startCount = taskManager.taskCount
+        
+        taskManager.removetask(by: task)
+        XCTAssertEqual(taskManager.taskCount, startCount - 1)
+        
+        // v2
+        taskManager.addTask(task)
+        let countTask = taskManager.taskCount
+        let index = taskManager.index(for: task)
+        
+        taskManager.removeTask(of: index)
+        XCTAssertEqual(taskManager.taskCount, countTask - 1)
+        
+        // V3
+        taskManager.addTask(task)
+        let indexTask = taskManager.index(for: task)
+        
+        taskManager.removetask(by: task)
+        XCTAssertNil(taskManager.task(for: indexTask)) // Должен быть nil
+    }
+    
+    func testUpdateCompleteStatus() throws {
+        
+    }
+    
+    func testTaskByIndex() throws {
+        
+    }
+    
+    private func makeTask() -> Task {
+        .init(title: "TEst Task", description: "Test Description", isComplete: false)
     }
 
     func testPerformanceExample() throws {
